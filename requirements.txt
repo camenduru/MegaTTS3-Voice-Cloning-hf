@@ -1,0 +1,4 @@
+openai-whisper
+gradio
+moviepy
+cached-path
