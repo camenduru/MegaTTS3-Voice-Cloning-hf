@@ -1,5 +1,4 @@
-## COPYRIGHT (c) 2024. ALL RIGHTS RESERVED.
-## REDISTRIBUTION OR MODIFICATION OF ANY KIND IS STRICTLY PROHIBITED.
+# Copyright (c) 2024, please contact before redistribution/modification
 
 FONT_URL = 'https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjQ.ttf'
 from moviepy.editor import *
