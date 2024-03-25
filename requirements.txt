@@ -1,4 +1,4 @@
-openai-whisper @ https://github.com/fakerybakery/whisper
+openai-whisper @ git+https://github.com/fakerybakery/whisper
 gradio
 moviepy
 cached-path
