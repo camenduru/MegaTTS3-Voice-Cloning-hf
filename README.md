@@ -6,7 +6,7 @@ colorTo: gray
 sdk: gradio
 sdk_version: 4.20.1
 app_file: app.py
-pinned: true
+pinned: false
 license: other
 short_description: Automatically add on-screen subs to your videos
 ---
