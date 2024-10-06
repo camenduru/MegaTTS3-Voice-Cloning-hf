@@ -1,4 +1,5 @@
 torch
 diffusers
 pillow
-transformers
+transformers[torch]
+accelerate
