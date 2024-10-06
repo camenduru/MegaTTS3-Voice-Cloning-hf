@@ -1,4 +1,3 @@
-openai-whisper @ git+https://github.com/fakerybakery/whisper
-gradio
-moviepy
-cached-path
+torch
+diffusers
+pillow
