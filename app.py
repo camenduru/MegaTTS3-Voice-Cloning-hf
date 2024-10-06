@@ -15,7 +15,7 @@ for id, model in MODELS:
     print(f"Loaded model {model}")
 
 @spaces.GPU
-def generate(text)
+def generate(text):
     prompt = "A cat holding a sign that says hello world"
     image = MODEL_CACHE['OpenFLUX.1'](
         prompt,
