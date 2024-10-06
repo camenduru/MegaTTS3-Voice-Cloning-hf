@@ -3,7 +3,7 @@ import gradio as gr
 from diffusers import FluxPipeline
 
 MODELS = {
-    'FLUX.1 [dev]': 'black-forest-labs/FLUX.1-dev',
+    # 'FLUX.1 [dev]': 'black-forest-labs/FLUX.1-dev',
     'FLUX.1 [schnell]': 'black-forest-labs/FLUX.1-schnell',
     'OpenFLUX.1': 'ostris/OpenFLUX.1',
 }
