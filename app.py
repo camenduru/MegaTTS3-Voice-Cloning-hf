@@ -10,8 +10,8 @@ MODELS = {
 MODEL_CACHE = {}
 for id, model in MODELS.items():
     print(f"Loading model {model}...")
-    MODEL_CACHE[model] = FluxPipeline.from_pretrained(model, torch_dtype=torch.bfloat16)
-    MODEL_CACHE[model].enable_model_cpu_offload() #save some VRAM by offloading the model to CPU. Remove this if you have enough GPU power
+    MODEL_CACHE[id] = FluxPipeline.from_pretrained(model, torch_dtype=torch.bfloat16)
+    MODEL_CACHE[id].enable_model_cpu_offload() #save some VRAM by offloading the model to CPU. Remove this if you have enough GPU power
     print(f"Loaded model {model}")
 
 @spaces.GPU
@@ -30,7 +30,7 @@ def generate(text):
     # image.save("flux-dev.png")
 
 with gr.Blocks() as demo:
-    prompt = gr.Textbox("Prompt")
+    prompt = gr.Textbox(label="Prompt")
     btn = gr.Button("Generate", variant="primary")
     out = gr.Image(label="Generated image", interactive=False)
     btn.click(generate,inputs=prompt,outputs=out)
