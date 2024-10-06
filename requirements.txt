@@ -3,3 +3,4 @@ diffusers
 pillow
 transformers[torch]
 accelerate
+sentencepiece
