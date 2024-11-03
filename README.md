@@ -1,13 +1,13 @@
 ---
-title: Compare Flux
-emoji: ⚖️
+title: hertz-dev
+emoji: ⚡
 colorFrom: gray
 colorTo: gray
 sdk: gradio
-sdk_version: 4.44.1
+sdk_version: 5.4.0
 app_file: app.py
 pinned: false
-short_description: Compare multiple variants of FLUX.1!
+short_description: Unofficial demo for hertz-dev
 ---
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
