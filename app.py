@@ -109,7 +109,8 @@ def get_completion(encoded_prompt_audio, prompt_len):
     if audio_tensor.abs().max() > 1:
         audio_tensor = audio_tensor / audio_tensor.abs().max()
 
-    return audio_tensor[:, max(prompt_len*2000 - 16000, 0):]
+    # return audio_tensor[:, max(prompt_len*2000 - 16000, 0):]
+    return audio_tensor
 
 @spaces.GPU
 def run(audio_path):
