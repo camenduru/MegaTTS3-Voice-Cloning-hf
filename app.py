@@ -6,6 +6,8 @@ from utils import load_ckpt, print_colored
 from tokenizer import make_tokenizer
 from model import get_hertz_dev_config
 import matplotlib.pyplot as plt
+import spaces
+import gradio as gr
 
 device = 'cuda' if T.cuda.is_available() else 'cpu'
 T.cuda.set_device(0)
@@ -127,3 +129,11 @@ def run(audio_path):
     completion = get_completion(encoded_prompt_audio, prompt_len)
     return display_audio(completion)
 
+
+
+with gr.Blocks() as demo:
+    gr.Markdown("# hertz-dev")
+    inp = gr.Audio(label="Input Audio", type="filepath", interactive=True)
+    btn = gr.Button("Continue", variant="primary")
+    out = gr.Audio(label="Output", interactive=False)
+    btn.click(run, inputs=inp, outputs=out)
