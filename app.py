@@ -137,3 +137,5 @@ with gr.Blocks() as demo:
     btn = gr.Button("Continue", variant="primary")
     out = gr.Audio(label="Output", interactive=False)
     btn.click(run, inputs=inp, outputs=out)
+
+demo.queue().launch()
