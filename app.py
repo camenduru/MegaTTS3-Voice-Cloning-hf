@@ -57,7 +57,7 @@ def load_and_preprocess_audio(audio_path):
         raise gr.Erorr("Maximum prompt is 5 minutes")
         # audio_tensor = audio_tensor[:, :max_samples]
 
-    duration_seconds = audio_tensor.shape[1] / sample_rate
+    duration_seconds = audio_tensor.shape[1] / sr
 
     gr.Info("Audio preprocessing complete!")
     return audio_tensor.unsqueeze(0), duration_seconds
