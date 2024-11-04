@@ -10,8 +10,8 @@ import spaces
 import gradio as gr
 
 device = 'cuda' if T.cuda.is_available() else 'cpu'
-T.cuda.set_device(0)
-print_colored(f"Using device: {device}", "grey")
+#T.cuda.set_device(0)
+print(f"Using device: {device}")
 
 audio_tokenizer = make_tokenizer(device)
 
