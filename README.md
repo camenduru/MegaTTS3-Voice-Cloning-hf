@@ -1,6 +1,7 @@
 ---
-title: LTX Video
+title: Spark TTS 0.5B
 sdk: gradio
 emoji: ⚡
-sdk_version: 5.6.0
+sdk_version: 5.19.0
+app_file: webui.py
 ---
