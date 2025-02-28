@@ -32,4 +32,18 @@ saved_model/**/* filter=lfs diff=lfs merge=lfs -text
 *.xz filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.zst filter=lfs diff=lfs merge=lfs -text
-*tfevents* filter=lfs diff=lfs merge=lfs -text
+*tfevents* filter=lfs diff=lfs merge=lfs -textexample/prompt_audio.wav filter=lfs diff=lfs merge=lfs -text
+example/results/20250225113521.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/trump/trump_en.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/zhongli/zhongli_en.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/余承东/yuchengdong_zh.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/刘德华/dehua_zh.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/哪吒/nezha_zh.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/徐志胜/zhisheng_zh.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/李靖/lijing_zh.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/杨澜/yanglan_zh.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/马云/mayun_zh.wav filter=lfs diff=lfs merge=lfs -text
+src/demos/鲁豫/luyu_zh.wav filter=lfs diff=lfs merge=lfs -text
+src/figures/infer_control.png filter=lfs diff=lfs merge=lfs -text
+src/figures/infer_voice_cloning.png filter=lfs diff=lfs merge=lfs -text
+src/logo.webp filter=lfs diff=lfs merge=lfs -text
