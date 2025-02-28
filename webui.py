@@ -21,7 +21,7 @@ import gradio as gr
 from datetime import datetime
 from cli.SparkTTS import SparkTTS
 from sparktts.utils.token_parser import LEVELS_MAP_UI
-
+import spaces
 
 def initialize_model(model_dir="pretrained_models/Spark-TTS-0.5B", device=0):
     """Load the model once at the beginning."""
@@ -30,7 +30,7 @@ def initialize_model(model_dir="pretrained_models/Spark-TTS-0.5B", device=0):
     model = SparkTTS(model_dir, device)
     return model
 
-
+@spaces.GPU
 def run_tts(
     text,
     model,
@@ -73,7 +73,7 @@ def run_tts(
 
     return save_path, model  # Return model along with audio path
 
-
+@spaces.GPU
 def voice_clone(text, model, prompt_text, prompt_wav_upload, prompt_wav_record):
     """Gradio interface for TTS with prompt speech input."""
     # Determine prompt speech (from audio file or recording)
@@ -85,7 +85,7 @@ def voice_clone(text, model, prompt_text, prompt_wav_upload, prompt_wav_record):
 
     return audio_output_path, model
 
-
+@spaces.GPU
 def voice_creation(text, model, gender, pitch, speed):
     """Gradio interface for TTS with control over voice attributes."""
     pitch = LEVELS_MAP_UI[int(pitch)]
@@ -189,4 +189,4 @@ def build_ui(model_dir, device=0):
 
 if __name__ == "__main__":
     demo = build_ui(model_dir="pretrained_models/Spark-TTS-0.5B", device=0)
-    demo.launch(server_name="0.0.0.0")
+    demo.queue().launch()
