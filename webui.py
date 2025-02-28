@@ -22,8 +22,9 @@ from datetime import datetime
 from cli.SparkTTS import SparkTTS
 from sparktts.utils.token_parser import LEVELS_MAP_UI
 import spaces
+from huggingface_hub import snapshot_download
 
-def initialize_model(model_dir="pretrained_models/Spark-TTS-0.5B", device=0):
+def initialize_model(model_dir=snapshot_download("SparkAudio/Spark-TTS-0.5B"), device=0):
     """Load the model once at the beginning."""
     logging.info(f"Loading model from: {model_dir}")
     device = torch.device(f"cuda:{device}")
