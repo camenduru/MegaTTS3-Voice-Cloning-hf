@@ -27,7 +27,7 @@ from huggingface_hub import snapshot_download
 def initialize_model(model_dir=snapshot_download("SparkAudio/Spark-TTS-0.5B"), device=0):
     """Load the model once at the beginning."""
     logging.info(f"Loading model from: {model_dir}")
-    device = torch.device(f"cuda:{device}")
+    device = torch.device("cuda")
     model = SparkTTS(model_dir, device)
     return model
 
@@ -100,7 +100,7 @@ def voice_creation(text, model, gender, pitch, speed):
 def build_ui(model_dir, device=0):
     with gr.Blocks() as demo:
         # Initialize model
-        model = initialize_model(model_dir, device=device)
+        model = initialize_model(model_dir, device="cuda")
         # Use HTML for centered title
         gr.HTML('<h1 style="text-align: center;">Spark-TTS by SparkAudio</h1>')
         with gr.Tabs():
