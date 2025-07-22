@@ -67,6 +67,9 @@ def generate_speech(inp_audio, inp_text, infer_timestep, p_w, t_w, processes, in
 
 
 if __name__ == '__main__':
+    # Download weights before starting
+    download_weights()
+    
     mp.set_start_method('spawn', force=True)
     mp_manager = mp.Manager()
 
