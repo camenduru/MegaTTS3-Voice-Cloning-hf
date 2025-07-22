@@ -4,7 +4,27 @@ import os
 from functools import partial
 import gradio as gr
 import traceback
+from huggingface_hub import hf_hub_download, snapshot_download
 from tts.infer_cli import MegaTTS3DiTInfer, convert_to_wav, cut_wav
+
+
+def download_weights():
+    """Download model weights from HuggingFace if not already present."""
+    repo_id = "mrfakename/MegaTTS3-VoiceCloning"
+    weights_dir = "weights"
+    
+    if not os.path.exists(weights_dir):
+        print("Downloading model weights from HuggingFace...")
+        snapshot_download(
+            repo_id=repo_id,
+            local_dir=weights_dir,
+            local_dir_use_symlinks=False
+        )
+        print("Model weights downloaded successfully!")
+    else:
+        print("Model weights already exist.")
+    
+    return weights_dir
 
 
 def model_worker(input_queue, output_queue, device_id):
