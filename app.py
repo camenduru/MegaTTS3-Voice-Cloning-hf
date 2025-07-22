@@ -1,6 +1,7 @@
 import spaces
 import torch
 import os
+os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 import gradio as gr
 import traceback
 from huggingface_hub import snapshot_download
@@ -10,7 +11,7 @@ from tts.infer_cli import MegaTTS3DiTInfer, convert_to_wav, cut_wav
 def download_weights():
     """Download model weights from HuggingFace if not already present."""
     repo_id = "mrfakename/MegaTTS3-VoiceCloning"
-    weights_dir = "weights"
+    weights_dir = "checkpoints"
     
     if not os.path.exists(weights_dir):
         print("Downloading model weights from HuggingFace...")
@@ -62,7 +63,9 @@ def generate_speech(inp_audio, inp_text, infer_timestep, p_w, t_w):
 
 
 with gr.Blocks(title="MegaTTS3 Voice Cloning") as demo:
-    gr.Markdown("# MegaTTS3 Voice Cloning")
+    gr.Markdown("# MegaTTS 3 Voice Cloning")
+    gr.Markdown("MegaTTS 3 is a text-to-speech model trained by ByteDance with exceptional voice cloning capabilities. The original authors did not release the WavVAE encoder, so voice cloning was not publicly available; however, thanks to [@ACoderPassBy](https://modelscope.cn/models/ACoderPassBy/MegaTTS-SFT)'s WavVAE encoder, we can now clone voices with MegaTTS 3!")
+    gr.Markdown("h/t to MysteryShack on Discord for the info about the unofficial WavVAE encoder!")
     gr.Markdown("Upload a reference audio clip and enter text to generate speech with the cloned voice.")
     
     with gr.Row():
