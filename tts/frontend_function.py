@@ -58,7 +58,7 @@ def align(self, wav):
         mel = torch.FloatTensor(mel_spec.T).to(self.device)[None].transpose(1,2)
         
         # Validate tensor before further processing
-        if torch.any(torch.isnan(mel)) or torch.any(torch.isinf(mel)):
+        if torch.isnan(mel).any() or torch.isinf(mel).any():
             raise ValueError("Mel tensor contains NaN or infinite values")
         prompt_max_frame = mel.size(2) // self.fm * self.fm
         mel = mel[:, :, :prompt_max_frame]
