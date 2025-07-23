@@ -4,7 +4,7 @@ emoji: 🎤
 colorFrom: blue
 colorTo: green
 sdk: gradio
-sdk_version: 5.37.0
+sdk_version: 5.38.0
 app_file: app.py
 pinned: true
 short_description: MegaTTS 3 but with voice cloning!
