@@ -40,11 +40,12 @@ def g2p(self, text_inp):
 ''' Get phoneme2mel align of prompt speech '''
 def align(self, wav):
     with torch.inference_mode():
-        # Validate input audio
-        if np.any(np.isnan(wav)) or np.any(np.isinf(wav)):
+        # Validate input audio - ensure it's numpy array
+        wav_np = np.asarray(wav)
+        if np.any(np.isnan(wav_np)) or np.any(np.isinf(wav_np)):
             raise ValueError("Input audio contains NaN or infinite values")
         
-        whisper_wav = librosa.resample(wav, orig_sr=self.sr, target_sr=16000)
+        whisper_wav = librosa.resample(wav_np, orig_sr=self.sr, target_sr=16000)
         
         # Validate resampled audio
         if np.any(np.isnan(whisper_wav)) or np.any(np.isinf(whisper_wav)):
@@ -52,14 +53,21 @@ def align(self, wav):
         
         # Get mel spectrogram with validation
         mel_spec = whisper.log_mel_spectrogram(whisper_wav)
-        if np.any(np.isnan(mel_spec)) or np.any(np.isinf(mel_spec)):
+        mel_spec_np = np.asarray(mel_spec)
+        if np.any(np.isnan(mel_spec_np)) or np.any(np.isinf(mel_spec_np)):
             raise ValueError("Mel spectrogram contains NaN or infinite values")
         
         mel = torch.FloatTensor(mel_spec.T).to(self.device)[None].transpose(1,2)
         
-        # Validate tensor before further processing
-        if torch.isnan(mel).any() or torch.isinf(mel).any():
-            raise ValueError("Mel tensor contains NaN or infinite values")
+        # Validate tensor before further processing - use safe tensor validation
+        try:
+            if torch.isnan(mel).any().item() or torch.isinf(mel).any().item():
+                raise ValueError("Mel tensor contains NaN or infinite values")
+        except Exception as e:
+            # Fallback to numpy validation if tensor validation fails
+            mel_np = mel.detach().cpu().numpy()
+            if np.any(np.isnan(mel_np)) or np.any(np.isinf(mel_np)):
+                raise ValueError("Mel tensor contains NaN or infinite values")
         prompt_max_frame = mel.size(2) // self.fm * self.fm
         mel = mel[:, :, :prompt_max_frame]
         token = torch.LongTensor([[798]]).to(self.device)
