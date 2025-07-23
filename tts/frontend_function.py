@@ -16,6 +16,7 @@ import torch
 import torch.nn.functional as F
 import whisper
 import librosa
+import numpy as np
 from copy import deepcopy
 from tts.utils.text_utils.ph_tone_convert import split_ph_timestamp, split_ph
 from tts.utils.audio_utils.align import mel2token_to_dur
@@ -39,8 +40,26 @@ def g2p(self, text_inp):
 ''' Get phoneme2mel align of prompt speech '''
 def align(self, wav):
     with torch.inference_mode():
+        # Validate input audio
+        if np.any(np.isnan(wav)) or np.any(np.isinf(wav)):
+            raise ValueError("Input audio contains NaN or infinite values")
+        
         whisper_wav = librosa.resample(wav, orig_sr=self.sr, target_sr=16000)
-        mel = torch.FloatTensor(whisper.log_mel_spectrogram(whisper_wav).T).to(self.device)[None].transpose(1,2)
+        
+        # Validate resampled audio
+        if np.any(np.isnan(whisper_wav)) or np.any(np.isinf(whisper_wav)):
+            raise ValueError("Resampled audio contains NaN or infinite values")
+        
+        # Get mel spectrogram with validation
+        mel_spec = whisper.log_mel_spectrogram(whisper_wav)
+        if np.any(np.isnan(mel_spec)) or np.any(np.isinf(mel_spec)):
+            raise ValueError("Mel spectrogram contains NaN or infinite values")
+        
+        mel = torch.FloatTensor(mel_spec.T).to(self.device)[None].transpose(1,2)
+        
+        # Validate tensor before further processing
+        if torch.any(torch.isnan(mel)) or torch.any(torch.isinf(mel)):
+            raise ValueError("Mel tensor contains NaN or infinite values")
         prompt_max_frame = mel.size(2) // self.fm * self.fm
         mel = mel[:, :, :prompt_max_frame]
         token = torch.LongTensor([[798]]).to(self.device)

@@ -17,3 +17,4 @@ openai-whisper==20240930
 httpx==0.28.1
 gradio==5.23.1
 hf-transfer
+soundfile
