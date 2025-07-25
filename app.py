@@ -171,7 +171,7 @@ with gr.Blocks(title="MegaTTS3 Voice Cloning") as demo:
     gr.Markdown("# MegaTTS 3 Voice Cloning")
     gr.Markdown("MegaTTS 3 is a text-to-speech model trained by ByteDance with exceptional voice cloning capabilities. The original authors did not release the WavVAE encoder, so voice cloning was not publicly available; however, thanks to [@ACoderPassBy](https://modelscope.cn/models/ACoderPassBy/MegaTTS-SFT)'s WavVAE encoder, we can now clone voices with MegaTTS 3!")
     gr.Markdown("This is by no means the best voice cloning solution, but it works pretty well for some specific use-cases. Try out multiple and see which one works best for you.")
-    gr.Markdown("**Please use this Space responsibly and do not abuse it!**")
+    gr.Markdown("**Please use this Space responsibly and do not abuse it!** This demo is for research and educational purposes only!")
     gr.Markdown("h/t to MysteryShack on Discord for the info about the unofficial WavVAE encoder!")
     gr.Markdown("Upload a reference audio clip and enter text to generate speech with the cloned voice.")
     
