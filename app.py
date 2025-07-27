@@ -1,4 +1,3 @@
-import spaces
 import torch
 import os
 os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
@@ -53,7 +52,6 @@ def reset_model():
         print(f"Failed to reinitialize model: {e}")
         return False
 
-@spaces.GPU
 def generate_speech(inp_audio, inp_text, infer_timestep, p_w, t_w):
     if not inp_audio or not inp_text:
         gr.Warning("Please provide both reference audio and text to generate.")
@@ -223,4 +221,4 @@ with gr.Blocks(title="MegaTTS3 Voice Cloning") as demo:
     )
 
 if __name__ == '__main__':
-    demo.launch(server_name='0.0.0.0', server_port=7860, debug=True)
+    demo.launch(server_name='0.0.0.0', server_port=7860, debug=True, share=True)
